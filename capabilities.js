@@ -7,7 +7,7 @@ const capabilities = {
 		"platformName": "MacOS Golden Gate",
 		"project": "Selenuim Test",
         "build": "headless Build",
-		"headless": true,
+		"headless": false,
 		"name": "Selenium Test",
 		"w3c": true
 	}
