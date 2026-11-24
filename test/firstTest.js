@@ -9,7 +9,7 @@ describe("add todo tests", function () {
     let driver = await new Builder().forBrowser("chrome").build();
 
     // navigate to our application
-    await driver.get("http://127.0.0.1:5500/index.html");
+    await driver.get("https://codewithsochima.github.io/Testmu-AI-todo/");
 
     // add a todo
     await driver

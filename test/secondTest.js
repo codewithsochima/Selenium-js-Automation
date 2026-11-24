@@ -1,43 +1,41 @@
 const { Builder, By, Key } = require("selenium-webdriver");
+const ltCapabilities = require("../capabilities");
 const should = require("chai").should();
 
 // describe block
 describe("add another todo tests", function () {
-  // it block
-  it("Successfully added another todo application", async function () {
-    // launch the browser
-    let driver = await new Builder().forBrowser("chrome").build();
+  var driver;
 
-    // navigate to our application
-    await driver.get("http://127.0.0.1:5500/index.html");
+  //username
+  const USERNAME = ltCapabilities.capabilities["LT:Options"].username;
 
-    // add a todo
-    await driver
-      .findElement(By.id("sampletodotext"))
-      .sendKeys("Learn Selenium", Key.RETURN);
+  // KEY
+  const KEY = ltCapabilities.capabilities["LT:Options"].accessKey;
 
-    //   assert
-    let todoTest = await driver
-      .findElement(By.xpath("/html/body/div/div/div/ul/li[6]/span"))
-      .getText()
-      .then(function (value) {
-        return value;
-      });
+  //host
+  const GRID_HOST = "hub.lambdatest.com/wd/hub";
 
-    // assert using chai should
-    todoTest.should.equal("Learn Selenium");
+  const GRID_URL = `https://${USERNAME}:${KEY}@${GRID_HOST}`;
 
-    // close the browser
+  beforeEach(function () {
+    ltCapabilities.capabilities["LT:Options"].name = this.currentTest.title;
+    driver = new Builder()
+    .usingServer(GRID_URL)
+    .withCapabilities(ltCapabilities.capabilities)
+    .build();
+  });
+
+  afterEach(async function() {
     await driver.quit();
   });
 
-   // it block
-  it("Adding a new test for report", async function () {
+    // it block
+  it("Successfully added another todo application", async function () {
     // launch the browser
-    let driver = await new Builder().forBrowser("chrome").build();
+    // let driver = await new Builder().forBrowser("chrome").build();
 
     // navigate to our application
-    await driver.get("http://127.0.0.1:5500/index.html");
+    await driver.get("https://codewithsochima.github.io/Testmu-AI-todo/");
 
     // add a todo
     await driver
@@ -53,9 +51,37 @@ describe("add another todo tests", function () {
       });
 
     // assert using chai should
-    todoTest.should.equal("Learn Java");
+    todoTest = todoTest.trim();
+    todoTest.should.equal("Learn Selenium");
 
-    // close the browser
-    await driver.quit();
+  
+  });
+
+  // it block
+  it("Adding a new test for report", async function () {
+    // launch the browser
+    // let driver = await new Builder().forBrowser("chrome").build();
+
+    // navigate to our application
+    await driver.get("https://codewithsochima.github.io/Testmu-AI-todo/");
+
+    // add a todo
+    await driver
+      .findElement(By.id("sampletodotext"))
+      .sendKeys("Learn Selenium", Key.RETURN);
+
+    //   assert
+    let todoTest = await driver
+      .findElement(By.xpath("/html/body/div/div/div/ul/li[6]/span"))
+      .getText()
+      .then(function (value) {
+        return value;
+      });
+
+    // assert using chai should
+    todoTest = todoTest.trim();
+    todoTest.should.equal("Learn Selenium");
+
+
   });
 });
