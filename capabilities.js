@@ -6,7 +6,8 @@ const capabilities = {
 		"accessKey": "LT_7XcFOI6ZR9c1G7riGQjjRZAQ2xcKCOhQTSpXCVdDFUFq220",
 		"platformName": "MacOS Golden Gate",
 		"project": "Selenuim Test",
-        "build": "Test Build",
+        "build": "headless Build",
+		"headless": true,
 		"name": "Selenium Test",
 		"w3c": true
 	}
